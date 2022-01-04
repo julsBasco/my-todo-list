@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Container, Alert } from "react-bootstrap";
+import "../css/Login.css";
 
 const NewUser = () => {
   const [password, setPassword] = useState("");
@@ -30,51 +31,56 @@ const NewUser = () => {
   return (
     <main>
       <Container>
-        <Form onSubmit={submitHandler}>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form.Group className="mb-2" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              ref={emailRef}
-              type="email"
-              placeholder="Enter email"
-              required
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+        <div className="flexContainer">
+          <Form className="mainForm" onSubmit={submitHandler}>
+            <h3 className="mb-4">Create a new account</h3>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form.Group className="mb-2" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                ref={emailRef}
+                type="email"
+                placeholder="Enter email"
+                required
+              />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              ref={passwordRef1}
-              type="password"
-              placeholder="Password"
-              required
-            />
-            <Form.Label>Re-enter Password</Form.Label>
-            <Form.Control
-              ref={passwordRef2}
-              onChange={(e) => {
-                if (passwordRef1.current.value === passwordRef2.current.value) {
-                  setError("");
-                  setPassword(passwordRef2.current.value);
-                  setLoading(false);
-                } else {
-                  setError("password does not match");
-                }
-              }}
-              type="password"
-              placeholder="Password"
-              required
-            />
-          </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                ref={passwordRef1}
+                type="password"
+                placeholder="Password"
+                required
+              />
+              <Form.Label>Re-enter Password</Form.Label>
+              <Form.Control
+                ref={passwordRef2}
+                onChange={(e) => {
+                  if (
+                    passwordRef1.current.value === passwordRef2.current.value
+                  ) {
+                    setError("");
+                    setPassword(passwordRef2.current.value);
+                    setLoading(false);
+                  } else {
+                    setError("password does not match");
+                  }
+                }}
+                type="password"
+                placeholder="Password"
+                required
+              />
+            </Form.Group>
 
-          <Button disabled={loading} variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+            <Button disabled={loading} variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </div>
       </Container>
     </main>
   );

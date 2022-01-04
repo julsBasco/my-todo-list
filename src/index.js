@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import Login from "./pages/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import { StoreProvider } from "./contexts/StoreContext";
 import { RequireAuth } from "./component/privateRoute";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NewUser from "./pages/NewUser";
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,7 +40,25 @@ ReactDOM.render(
               </RequireAuth>
             </AuthProvider>
           }
-        ></Route>
+        >
+          <Route
+            path="/"
+            element={
+              <StoreProvider>
+                <Home />
+              </StoreProvider>
+            }
+          />
+          <Route
+            path="home"
+            element={
+              <StoreProvider>
+                <Home />
+              </StoreProvider>
+            }
+          />
+          <Route path="about" element={<About />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

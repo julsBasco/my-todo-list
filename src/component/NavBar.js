@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import { useNavigate, NavLink } from "react-router-dom";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 
 const NavBar = () => {
   const [loading, setLoading] = useState(false);
@@ -25,17 +25,23 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Navbar.Text>
-                {currentUser.email}{" "}
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  onClick={handleClick}
-                  disabled={loading}
-                >
-                  {!loading ? "logout" : "loading"}
-                </Button>
-              </Navbar.Text>
+              <Container>
+                <NavLink to="home">Home</NavLink>
+                {"   "}
+                <NavLink to="about">About</NavLink>
+                {"   "}
+                <Navbar.Text>
+                  {currentUser.email}{" "}
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={handleClick}
+                    disabled={loading}
+                  >
+                    {!loading ? "logout" : "loading"}
+                  </Button>
+                </Navbar.Text>
+              </Container>
             </Nav>
           </Navbar.Collapse>
         </Container>
